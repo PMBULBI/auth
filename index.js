@@ -6,5 +6,6 @@ if (token === ""){
     window.location.replace("../");
 }else{
     setInner("nama","Bambang Pamungkas "+token);
+    window.location.replace("./signup");
 }
 
