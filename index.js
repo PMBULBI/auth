@@ -5,7 +5,7 @@ let token=getCookie("login");
 if (token === ""){
     window.location.replace("../");
 }else{
-    setInner("nama","Bambang Pamungkas "+token);
-    window.location.replace("../signup");
+    setInner("Selamat Datang di Sistem PMB","Anda akan diarahkan ke laman selanjutnya "+token);
+    window.location.replace("../pmb-mhs/");
 }
 
