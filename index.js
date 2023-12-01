@@ -18,7 +18,6 @@ function responseData(result){
         window.location.replace("../pmb-mhs/");
     }else{
         setInner("nama","Silahkan Lakukan Pendaftaran "+token);
-        getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
         setCookieWithExpireHour("no_hp", result.data.phone_num, 2);
         window.location.replace("../signup");
     }
