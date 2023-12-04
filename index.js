@@ -5,7 +5,7 @@ import { getHash } from "https://jscroot.github.io/url/croot.js";
 
 
 let referal = getHash();
-if (token !== ""){
+if (referal !== ""){
     setCookieWithExpireHour("referal", referal, 8);
 }
 
