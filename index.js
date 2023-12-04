@@ -1,6 +1,14 @@
 import { setInner } from "https://jscroot.github.io/element/croot.js";
 import { postWithToken, getWithHeader } from "https://jscroot.github.io/api/croot.js";
 import { getCookie, setCookieWithExpireHour } from "https://jscroot.github.io/cookie/croot.js";
+import { getHash } from "https://jscroot.github.io/url/croot.js";
+
+
+let referal = getHash();
+if (token !== ""){
+    setCookieWithExpireHour("referal", referal, 8);
+}
+
 
 let token = getCookie("login");
 if (token === ""){
