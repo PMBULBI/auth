@@ -5,3 +5,4 @@ untuk referal menggunakan hash:
 ```html
 https://pmb.ulbi.ac.id/auth/#anu7
 ```
+dengan  nama cookies : referal
