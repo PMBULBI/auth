@@ -9,17 +9,21 @@ if (referal !== ""){
     setCookieWithExpireHour("referal", referal, 8);
 }
 
-
 let token = getCookie("login");
 if (token === ""){
     window.location.replace("../");
 }else{
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
-    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData)
+    getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
+    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
     window.location.replace("../pmb-mhs/");
 }
 
-
+function responseDataAdmin(result){
+    if (result.data.status){
+        window.location.replace("../pmb-admin/");
+    }
+}
 
 function responseData(result){
     if (result.data.is_registered){
