@@ -20,7 +20,8 @@ if (token === ""){
 }
 
 function responseDataAdmin(result){
-    if (result.data.status){
+    setCookieWithExpireHour("admin status", result.status);
+    if (result.success){
         window.location.replace("../pmb-admin/");
     }
 }
