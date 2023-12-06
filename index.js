@@ -16,20 +16,22 @@ if (token === ""){
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
     getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
     getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
-    window.location.replace("../pmb-mhs/");
+    // window.location.replace("../pmb-mhs/");
 }
 
 function responseDataAdmin(result){
     setCookieWithExpireHour("admin status", result.status);
     if (result.success){
         window.location.replace("../pmb-admin/");
+    } else {
+        getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
     }
 }
 
 function responseData(result){
     if (result.data.is_registered){
         window.location.replace("../pmb-mhs/");
-    }else{
+    } else {
         setInner("nama","Silahkan Lakukan Pendaftaran "+token);
         setCookieWithExpireHour("no_hp", result.data.phone_num, 2);
         window.location.replace("../signup");
