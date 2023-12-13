@@ -22,7 +22,7 @@ if (token === ""){
 function responseDataAdmin(result) {
     setCookieWithExpireHour("admin status", result.success);
     if (result.success) {
-        setCookieWithExpireHour("Masuk ke Admin", "ok");
+        // setCookieWithExpireHour("Masuk ke Admin", "ok");
         window.location.replace("../pmb-admin/");
     } else {
         setCookieWithExpireHour("Masuk ke Bukan Admin", "Bukan Admin");
