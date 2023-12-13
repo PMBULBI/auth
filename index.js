@@ -19,11 +19,11 @@ if (token === ""){
     // window.location.replace("../pmb-mhs/");
 }
 
-function responseDataAdmin(result){
+function responseDataAdmin(result) {
     setCookieWithExpireHour("admin status", result.success);
-    if (result.success){
-        window.location.replace("../pmb-admin/");
+    if (result.success) {
         setCookieWithExpireHour("Masuk ke Admin", "ok");
+        window.location.replace("../pmb-admin/");
     } else {
         setCookieWithExpireHour("Masuk ke Bukan Admin", "Bukan Admin");
         getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
