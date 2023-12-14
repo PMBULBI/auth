@@ -4,20 +4,24 @@ import { getCookie, setCookieWithExpireHour } from "https://jscroot.github.io/co
 import { getHash } from "https://jscroot.github.io/url/croot.js";
 
 
-let referal = getHash();
-if (referal !== ""){
-    setCookieWithExpireHour("referal", referal, 8);
-}
+const main = async () =>{
+    let referal = getHash();
+    if (referal !== ""){
+        setCookieWithExpireHour("referal", referal, 8);
+    }
+    
+    let token = getCookie("login");
+    if (token === ""){
+        window.location.replace("../");
+    }else{
+        postWithToken("https://komarbe.ulbi.ac.id/refresh/token","LOGIN",token,"",setcookie);
+        token = getCookie("login");
+        setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
+        getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
+        getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
+        // window.location.replace("../pmb-mhs/");
+    }
 
-let token = getCookie("login");
-if (token === ""){
-    window.location.replace("../");
-}else{
-    postWithToken("https://komarbe.ulbi.ac.id/refresh/token","LOGIN",token,"",setcookie);
-    setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
-    getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
-    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
-    // window.location.replace("../pmb-mhs/");
 }
 
 function responseDataAdmin(result) {
@@ -39,9 +43,11 @@ function responseData(result){
     if (result.data.is_registered){
         window.location.replace("../pmb-mhs/");
     } else {
-        setInner("nama","Silahkan Lakukan Pendaftaran "+token);
+        setInner("nama", "Silahkan Lakukan Pendaftaran " + token);
         setCookieWithExpireHour("no_hp", result.data.phone_num, 2);
         window.location.replace("../signup");
     }
-    
 }
+
+
+main();
