@@ -13,7 +13,7 @@ let token = getCookie("login");
 if (token === ""){
     window.location.replace("../");
 }else{
-    postWithToken("https://komarbe.ulbi.ac.id/refresh/token","LOGIN",token,"",responseFunction)
+    postWithToken("https://komarbe.ulbi.ac.id/refresh/token","LOGIN",token,"",setcookie);
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
     getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
     getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
