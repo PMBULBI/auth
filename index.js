@@ -5,12 +5,12 @@ import { getHash } from "https://jscroot.github.io/url/croot.js";
 
 
 const main = async () =>{
-    let referal = getHash();
+    let referal = await getHash();
     if (referal !== ""){
-        setCookieWithExpireHour("referal", referal, 8);
+        setCookieWithExpireHour("referal", referal, 8760);
     }
     
-    let token = getCookie("login");
+    let token = await getCookie("login");
     if (token === ""){
         window.location.replace("../");
         return;
@@ -20,9 +20,7 @@ const main = async () =>{
     token = await getCookie("login");
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
     getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
-    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
-    window.location.replace("../pmb-mhs/");
-    return;
+    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);    return;
 
 }
 
