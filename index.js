@@ -36,7 +36,9 @@ function responseDataAdmin(result) {
 }
 
 function refreshCookie(res){
-    setCookieWithExpireHour("login", res.data.token, 18);
+    if (res.data.token.length !== 0){
+        setCookieWithExpireHour("login", res.data.token, 18);
+    }
     return;
 }
 
