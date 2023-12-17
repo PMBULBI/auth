@@ -44,7 +44,7 @@ function refreshCookie(res){
 
 function responseData(result){
     if (result.data.is_registered){
-        window.location.replace("../pmb-mhs/");
+        //window.location.replace("../pmb-mhs/");
     } else {
         setInner("nama", "Silahkan Lakukan Pendaftaran " + token);
         setCookieWithExpireHour("no_hp", result.data.phone_num, 2);
