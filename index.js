@@ -29,6 +29,7 @@ function responseDataAdmin(result) {
         window.location.replace("../pmb-admin/");
     }else{
         setCookieWithExpireHour("Masuk ke Bukan Admin", "Bukan Admin");
+        let token = await getCookie("login");
         getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseDataPeserta);
     }
 }
