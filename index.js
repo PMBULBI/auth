@@ -16,18 +16,17 @@ const main = async () =>{
         return;
     }
 
-    postWithToken("https://komarbe.ulbi.ac.id/refresh/token", "LOGIN", token, "", setcookie);
+    await postWithToken("https://komarbe.ulbi.ac.id/refresh/token", "LOGIN", token, "", refreshCookie);
     token = await getCookie("login");
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
-    getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
-    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);    return;
-
+    await getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
+    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
 }
 
 function responseDataAdmin(result) {
-    setCookieWithExpireHour("admin status", result.success);
+    setCookieWithExpireHour("admin status", result.success,18);
     if (result.success) {
-        setCookieWithExpireHour("Masuk ke Admin", "ok");
+        setCookieWithExpireHour("Masuk ke Admin", "ok",18);
         window.location.replace("../pmb-admin/");
         return;
     }
@@ -36,7 +35,7 @@ function responseDataAdmin(result) {
     return;
 }
 
-function setcookie(res){
+function refreshCookie(res){
     setCookieWithExpireHour("login", res.data.token, 18);
     return;
 }
