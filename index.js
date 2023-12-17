@@ -19,20 +19,18 @@ const main = async () =>{
     await postWithToken("https://komarbe.ulbi.ac.id/refresh/token", "LOGIN", token, "", refreshCookie);
     token = await getCookie("login");
     setInner("nama","Anda akan diarahkan ke laman selanjutnya "+token);
-    await getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
-    getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseData);
+    getWithHeader("https://komarbe.ulbi.ac.id/isadmin", "LOGIN", token, responseDataAdmin);
 }
 
 function responseDataAdmin(result) {
     setCookieWithExpireHour("admin status", result.success,18);
     if (result.success) {
-        setCookieWithExpireHour("Masuk ke Admin", "ok",18);
+        setCookieWithExpireHour("Masuk ke Admin", "ok");
         window.location.replace("../pmb-admin/");
-        return;
+    }else{
+        setCookieWithExpireHour("Masuk ke Bukan Admin", "Bukan Admin");
+        getWithHeader("https://komarbe.ulbi.ac.id/pendaftar/pendaftar/registered", "LOGIN", token, responseDataPeserta);
     }
-
-    setCookieWithExpireHour("Masuk ke Bukan Admin", "Bukan Admin");
-    return;
 }
 
 function refreshCookie(res){
@@ -42,9 +40,9 @@ function refreshCookie(res){
     return;
 }
 
-function responseData(result){
+function responseDataPeserta(result){
     if (result.data.is_registered){
-        //window.location.replace("../pmb-mhs/");
+        window.location.replace("../pmb-mhs/");
     } else {
         setInner("nama", "Silahkan Lakukan Pendaftaran " + token);
         setCookieWithExpireHour("no_hp", result.data.phone_num, 2);
